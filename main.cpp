@@ -53,9 +53,27 @@ int main() {
 
     cout << "\n==============================" << endl;
     cout << "RELATÓRIO FINAL:" << endl;
+    int alunosAprovados = 0; int alunosReprovados = 0; int alunosRecuperacao = 0;
     for (int i = 0; i < qntdAlunos; i++) {
         cout << i + 1 << ". " << nomes[i] << " - Média: " << media[i] << endl;
+        if (media[i] >= 7) {
+            cout << "   Situação: Aprovado" << endl;
+            alunosAprovados++;
+        } else if (media[i] >= 5) {
+            cout << "   Situação: Recuperação" << endl;
+            alunosRecuperacao++;
+        } else {
+            cout << "   Situação: Reprovado" << endl;
+            alunosReprovados++;
+        }
     }
+
+    cout << "==============================" << endl;
+    cout << "RESUMO:" << endl;
+    cout << "Alunos aprovados: " << alunosAprovados << endl;
+    cout << "Alunos em recuperação: " << alunosRecuperacao << endl;
+    cout << "Alunos reprovados: " << alunosReprovados << endl;
+    cout << "==============================" << endl;
 
     return 0;
 }
