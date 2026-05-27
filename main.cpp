@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <fstream>
 #include <windows.h>
 
 using namespace std;
@@ -74,6 +75,29 @@ int main() {
     cout << "Alunos em recuperação: " << alunosRecuperacao << endl;
     cout << "Alunos reprovados: " << alunosReprovados << endl;
     cout << "==============================" << endl;
+
+ofstream arquivo("relatorio.txt");
+if (arquivo.is_open()) {
+    arquivo << "=== RELATÓRIO FINAL ===" << endl;
+    for (int i = 0; i < qntdAlunos; i++) {
+        arquivo << nomes[i] << " - Média: " << media[i] << endl;
+        if (media[i] >= 7) {
+            arquivo << "   Situação: Aprovado" << endl;
+        } else if (media[i] >= 5) {
+            arquivo << "   Situação: Recuperação" << endl;
+        } else {
+            arquivo << "   Situação: Reprovado" << endl;
+        }
+    }
+    arquivo << "\nResumo: " << alunosAprovados << " aprovados, " << alunosRecuperacao << " em recuperação, " << alunosReprovados << " reprovados." << endl;
+arquivo.close();
+    cout << "\nRelatório salvo em 'relatorio.txt'" << endl;
+} else {
+    cout << "Erro ao salvar o relatório!" << endl;
+}
+
+
+
 
     return 0;
 }

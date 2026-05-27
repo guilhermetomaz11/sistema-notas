@@ -1,0 +1,7 @@
+=== RELATÓRIO FINAL ===
+Guilherme - Média: 7.66667
+   Situação: Aprovado
+Pedro - Média: 7
+   Situação: Aprovado
+
+Resumo: 2 aprovados, 0 em recuperação, 0 reprovados.
