@@ -16,6 +16,7 @@ int main() {
     int qntdDisciplinas;
     int opcaoInicial;
 
+    do {
     cout << "\n=== SISTEMA DE NOTAS v4.1 ===" << endl;
     cout << "1 - Novo relatório" << endl;
     cout << "2 - Ver relatório salvo" << endl;
@@ -26,6 +27,7 @@ int main() {
 
 
     if (opcaoInicial == 4) {
+        cout << "Saindo do sistema..." << endl;
         return 0;
     }
 
@@ -48,7 +50,11 @@ int main() {
     }else {
         cout << "Nenhum relatório encontrado!" << endl;
     }
-    return 0;
+    }
+
+    if (opcaoInicial != 1) {
+        cout << "Opção inválida! Por favor, escolha uma opção válida." << endl;
+        continue; 
     }
     
 
@@ -131,7 +137,7 @@ arquivo.close();
     cout << "Erro ao salvar o relatório!" << endl;
 }
 
-
+} while(opcaoInicial != 4);
 
 
     return 0;
