@@ -67,6 +67,17 @@ int main() {
     cin.ignore();
 
     for (int i = 0; i < qntdAlunos; i++) {
+            do {
+                cout << "Nome do aluno " << i + 1 << ": ";
+                getline(cin, nomes[i]);
+                
+                if (nomes[i] == "") {
+                    cout << "O nome não pode estar em branco. Por favor, digite novamente." << endl;
+                }
+            } while (nomes[i] == "");
+        }
+
+    for (int i = 0; i < qntdAlunos; i++) {
         cout << "Nome do aluno " << i + 1 << ": ";
         getline(cin, nomes[i]);
     }
@@ -78,6 +89,7 @@ int main() {
 
     
     cin.ignore(); 
+    
 
     for (int i = 0; i < qntdAlunos; i++) {
         cout << "\nNotas do aluno: " << nomes[i] << endl;
