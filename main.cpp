@@ -77,11 +77,6 @@ int main() {
             } while (nomes[i] == "");
         }
 
-    for (int i = 0; i < qntdAlunos; i++) {
-        cout << "Nome do aluno " << i + 1 << ": ";
-        getline(cin, nomes[i]);
-    }
-
     do {
         cout << "Quantidade de disciplinas (1 a 5): ";
         cin >> qntdDisciplinas;
@@ -109,8 +104,20 @@ int main() {
     cout << "\n==============================" << endl;
     cout << "RELATÓRIO FINAL:" << endl;
     int alunosAprovados = 0; int alunosReprovados = 0; int alunosRecuperacao = 0;
+
+    int indiceMaior = 0;
+    int indiceMenor = 0;
+    
     for (int i = 0; i < qntdAlunos; i++) {
         cout << i + 1 << ". " << nomes[i] << " - Média: " << media[i] << endl;
+
+        if (media[i] > media[indiceMaior]) {
+                indiceMaior = i;
+            }
+            if (media[i] < media[indiceMenor]) {
+                indiceMenor = i;
+            }
+
         if (media[i] >= 7) {
             cout << "   Situação: Aprovado" << endl;
             alunosAprovados++;
@@ -128,6 +135,9 @@ int main() {
     cout << "Alunos aprovados: " << alunosAprovados << endl;
     cout << "Alunos em recuperação: " << alunosRecuperacao << endl;
     cout << "Alunos reprovados: " << alunosReprovados << endl;
+    cout << "==============================" << endl;
+    cout << "Maior media: " << nomes[indiceMaior] << " (" << media[indiceMaior] << ")" << endl;
+    cout << "Menor media: " << nomes[indiceMenor] << " (" << media[indiceMenor] << ")" << endl;
     cout << "==============================" << endl;
 
 ofstream arquivo("relatorio.txt");
@@ -147,6 +157,10 @@ if (arquivo.is_open()) {
         }
     }
     arquivo << "\nResumo: " << alunosAprovados << " aprovados, " << alunosRecuperacao << " em recuperação, " << alunosReprovados << " reprovados." << endl;
+
+    arquivo << "Maior media: " << nomes[indiceMaior] << " (" << media[indiceMaior] << ")" << endl;
+    arquivo << "Menor media: " << nomes[indiceMenor] << " (" << media[indiceMenor] << ")" << endl;
+
 arquivo.close();
     cout << "\nRelatório salvo em 'relatorio.txt'" << endl;
 } else {
