@@ -17,17 +17,20 @@ int main() {
     int qntdDisciplinas;
     int opcaoInicial;
 
+    bool temDados = false;
+
     do {
     cout << "\n=== SISTEMA DE NOTAS v4.1 ===" << endl;
     cout << "1 - Novo relatório" << endl;
     cout << "2 - Ver relatório salvo" << endl;
     cout << "3 - Sobre o sistema" << endl;
-    cout << "4 - Sair" << endl;
+    cout << "4 - Relatório de reprovados" << endl;
+    cout << "5 - Sair" << endl;
     cout << "Escolha uma opção: ";
     cin >> opcaoInicial;
 
 
-    if (opcaoInicial == 4) {
+    if (opcaoInicial == 5) {
         cout << "Saindo do sistema..." << endl;
         return 0;
     }
@@ -52,6 +55,35 @@ int main() {
         cout << "Nenhum relatório encontrado!" << endl;
     }
     }
+
+    if (opcaoInicial == 4) {
+            if (!temDados) {
+                cout << "Nenhum dado inserido nesta sessão ainda! Crie um 'Novo relatório' primeiro." << endl;
+                continue;
+            }
+
+            ofstream arqReprovados("reprovados.txt");
+            if (arqReprovados.is_open()) {
+                time_t agora = time(0);
+                char* dataHora = ctime(&agora);
+                arqReprovados << "Data do relatorio: " << dataHora;
+                arqReprovados << "=== RELATÓRIO DE REPROVADOS ===" << endl;
+                
+                int totalReprovados = 0;
+                for (int i = 0; i < qntdAlunos; i++) {
+                    if (media[i] < 5) {
+                        arqReprovados << nomes[i] << " - Média: " << media[i] << " (Situação: Reprovado)" << endl;
+                        totalReprovados++;
+                    }
+                }
+                arqReprovados << "\nTotal de alunos reprovados: " << totalReprovados << endl;
+                arqReprovados.close();
+                cout << "\nRelatório de reprovados salvo com sucesso em 'reprovados.txt'!" << endl;
+            } else {
+                cout << "Erro ao criar o arquivo de reprovados!" << endl;
+            }
+            continue;
+        }
 
     if (opcaoInicial != 1) {
         cout << "Opção inválida! Por favor, escolha uma opção válida." << endl;
@@ -100,6 +132,8 @@ int main() {
         }
         media[i] = soma / qntdDisciplinas;
     }
+
+    temDados = true;
 
     cout << "\n==============================" << endl;
     cout << "RELATÓRIO FINAL:" << endl;
@@ -167,7 +201,7 @@ arquivo.close();
     cout << "Erro ao salvar o relatório!" << endl;
 }
 
-} while(opcaoInicial != 4);
+} while(opcaoInicial != 5);
 
 
     return 0;
