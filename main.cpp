@@ -14,8 +14,43 @@ int main() {
     float notas[20][5];
     float media[20];
     int qntdDisciplinas;
+    int opcaoInicial;
 
-    cout << "=== SISTEMA DE NOTAS v4.0 ===" << endl;
+    cout << "\n=== SISTEMA DE NOTAS v4.1 ===" << endl;
+    cout << "1 - Novo relatório" << endl;
+    cout << "2 - Ver relatório salvo" << endl;
+    cout << "3 - Sobre o sistema" << endl;
+    cout << "4 - Sair" << endl;
+    cout << "Escolha uma opção: ";
+    cin >> opcaoInicial;
+
+
+    if (opcaoInicial == 4) {
+        return 0;
+    }
+
+    if (opcaoInicial == 3) {
+        cout << "\n=== SOBRE ===" << endl;
+        cout << "Sistema de Notas v4.1" << endl;
+        cout << "Desenvolvido por: Guilherme Tomaz Camara" << endl; 
+        cout << "Turma: LOPAL 2026 - SENAI-SP\n" << endl;
+        return 0;
+    }
+    if (opcaoInicial == 2) {
+        ifstream leitura("relatorio.txt");
+        if (leitura.is_open()) {
+            string linha;
+            cout << "\n";
+            while (getline(leitura, linha)) {
+            cout << linha << endl;
+        }
+            leitura.close();
+    }else {
+        cout << "Nenhum relatório encontrado!" << endl;
+    }
+    return 0;
+    }
+    
 
     do {
         cout << "Quantidade de alunos (1 a 20): ";
